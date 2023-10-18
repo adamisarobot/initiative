@@ -2,11 +2,19 @@
   <main>
     <h1>Welcome</h1>
     <div class="card">
-      <Form />
+      <InitiativeForm @submit="addToList" />
+      <InitiativeList :initiative="initiative" />
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import Form from '@/components/Form.vue';
+import { reactive } from 'vue';
+import InitiativeForm from '@/components/InitiativeForm.vue';
+import InitiativeList from '@/components/InitiativeList.vue';
+
+const initiative = reactive<{ name: string; initiative: number }[]>([]);
+const addToList = (pc: { name: string; initiative: number }) => {
+  initiative.sort().push(pc);
+};
 </script>
