@@ -1,11 +1,14 @@
 <template>
-  <ul class="init-list" v-if="sortedInit.length > 0">
-    <InitiativeItem v-for="pc in sortedInit" :key="pc.name" :pc="pc" />
-  </ul>
+  <draggable v-model="sortedInit" tag="ul" class="init-list" v-if="sortedInit.length > 0">
+    <template #item="{ element: pc }">
+      <InitiativeItem :pc="pc" />
+    </template>
+  </draggable>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import draggable from 'vuedraggable';
 import InitiativeItem from '@/components/InitiativeItem.vue';
 
 const props = defineProps<{
