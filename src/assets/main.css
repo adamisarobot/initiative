@@ -1,7 +1,12 @@
 @import './base.css';
-@import './forms.css';
 
 #app {
-  max-width: 1200px;
+  max-width: 37.5rem;
   margin: 0 auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
