@@ -1,20 +1,22 @@
 <template>
   <li class="item">
-    <div class="item__init">{{ pc.initiative }}</div>
+    <div class="item__init">
+      <InlineInputNumber :number="pc.initiative" />
+    </div>
     <div class="item__name">{{ pc.name }}</div>
     <div class="item__hp" v-if="pc.hp">
-      <label class="sr-only" for="hp-inline">HP: </label>
-      <input class="item__inline" type="text" :value="pc.hp" maxlength="3" data-lpignore="true" />
+      <InlineInputNumber :number="pc.hp" label="HP: " />
     </div>
   </li>
 </template>
 
 <script lang="ts" setup>
+import InlineInputNumber from '@/components/InlineInputNumber.vue';
 defineProps<{
   pc: {
     name: string;
     initiative: number;
-    hp?: number;
+    hp: number;
   };
 }>();
 </script>
