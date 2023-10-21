@@ -13,8 +13,8 @@ import { reactive } from 'vue';
 import InitiativeForm from '@/components/InitiativeForm.vue';
 import InitiativeList from '@/components/InitiativeList.vue';
 
-const initiative = reactive<{ name: string; initiative: number; hp?: number }[]>([]);
-const addToList = (pc: { name: string; initiative: number; hp?: number }) => {
+const initiative = reactive<{ name: string; initiative: number; hp: number }[]>([]);
+const addToList = (pc: { name: string; initiative: number; hp: number }) => {
   initiative.sort().push(pc);
 };
 </script>

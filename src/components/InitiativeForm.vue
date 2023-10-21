@@ -1,7 +1,7 @@
 <template>
   <form class="form">
     <div class="form-group">
-      <label for="name">Name *</label>
+      <label for="name">Name <span class="required">*</span></label>
       <input
         type="text"
         id="name"
@@ -12,12 +12,26 @@
       />
     </div>
     <div class="form-group">
-      <label for="init">Initiative *</label>
-      <input type="text" id="init" class="form-control" v-model="init" data-lpignore="true" />
+      <label for="init">Initiative <span class="required">*</span></label>
+      <input
+        type="text"
+        id="init"
+        class="form-control"
+        v-model="init"
+        data-lpignore="true"
+        @:keypress="numberOnly($event)"
+      />
     </div>
     <div class="form-group">
-      <label for="hp">Hit Points</label>
-      <input type="text" id="hp" class="form-control" v-model="hp" data-lpignore="true" />
+      <label for="hp">Hit Points <span class="required">*</span></label>
+      <input
+        type="text"
+        id="hp"
+        class="form-control"
+        v-model="hp"
+        data-lpignore="true"
+        @:keypress="numberOnly($event)"
+      />
     </div>
     <button type="button" class="btn push-left" @click="submit">Add</button>
   </form>
@@ -37,10 +51,16 @@ const alphaOnly = (event: { keyCode: number; preventDefault: () => void }) => {
   else event.preventDefault();
 };
 
+const numberOnly = (event: { keyCode: number; preventDefault: () => void }) => {
+  const char = String.fromCharCode(event.keyCode);
+  if (/^[[0-9]+$/.test(char)) return true;
+  else event.preventDefault();
+};
+
 const submit = () => {
   if (name.value === '' || init.value === undefined) return;
 
-  emit('submit', { name: name.value, initiative: init.value, hp: hp.value });
+  emit('submit', { name: name.value, initiative: +init.value, hp: +hp.value });
   name.value = '';
   init.value = undefined;
   hp.value = undefined;
@@ -48,6 +68,9 @@ const submit = () => {
 </script>
 
 <style scoped>
+.required {
+  color: red;
+}
 .form {
   display: flex;
   gap: 1rem;
@@ -68,7 +91,6 @@ const submit = () => {
   font-weight: bold;
   margin-bottom: 0;
 }
-
 .form-group input {
   max-width: 100px;
   padding: 0.5rem;
