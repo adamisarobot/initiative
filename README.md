@@ -4,6 +4,7 @@ A project to create a simple but feature rich initiative/stat tracker for 5e/RPG
 
 ## Todos:
 
+
 [ ] Add initiative editing and auto re-sort  
 [ ] Add Active, prev <> next  
 [ ] Add status [Green, Bloodied, Dead]  
@@ -15,6 +16,7 @@ A project to create a simple but feature rich initiative/stat tracker for 5e/RPG
 &nbsp;  
 &nbsp;  
 &nbsp;
+
 
 ## Project Setup
 
