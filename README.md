@@ -4,13 +4,19 @@ A project to create a simple but feature rich initiative/stat tracker for 5e/RPG
 
 ## Todos:
 
-[] Add initiative editing and auto re-sort
-[] Add Active, prev <> next
-[] Add status [Green, Bloodied, Dead]
-[] Add State / Pinia
-[] Add FireVue - Firebase Realtime Database
-[] Add Rooms / Admin page
-[] Kick dead creatures into a different list
+
+[ ] Add initiative editing and auto re-sort  
+[ ] Add Active, prev <> next  
+[ ] Add status [Green, Bloodied, Dead]  
+[ ] Add State / Pinia  
+[ ] Add FireVue - Firebase Realtime Database  
+[ ] Add Rooms / Admin page  
+[ ] Kick dead creatures into a different list
+
+&nbsp;  
+&nbsp;  
+&nbsp;
+
 
 ## Project Setup
 
