@@ -1,24 +1,19 @@
 <template>
-  <ul class="init-list" v-if="sortedInit.length > 0">
-    <InitiativeItem v-for="pc in sortedInit" :pc="pc" :key="pc.initiative" />
+  <ul class="init-list" v-if="initiative.length > 0">
+    <InitiativeItem v-for="pc in initiative" :pc="pc" :key="pc.name" />
   </ul>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import InitiativeItem from '@/components/InitiativeItem.vue';
 
-const props = defineProps<{
+defineProps<{
   initiative: {
     name: string;
     initiative: number;
     hp: number;
   }[];
 }>();
-
-const sortedInit = computed(() => {
-  return [...props.initiative].sort((a, b) => b.initiative - a.initiative);
-});
 </script>
 
 <style scoped>

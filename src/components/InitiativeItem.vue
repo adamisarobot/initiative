@@ -4,7 +4,7 @@
       <InlineInputNumber :number="pc.initiative" />
     </div>
     <div class="item__name">{{ pc.name }}</div>
-    <div class="item__hp" v-if="pc.hp">
+    <div class="item__hp">
       <InlineInputNumber :number="pc.hp" label="HP: " />
     </div>
   </li>
