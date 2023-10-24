@@ -1,39 +1,47 @@
 <template>
   <form class="form">
-    <div class="form-group">
-      <label for="name">Name <span class="required">*</span></label>
-      <input
-        type="text"
-        id="name"
-        class="form-control"
-        v-model="name"
-        @:keypress="alphaOnly($event)"
-        data-lpignore="true"
-      />
+    <div class="creature">
+      <div class="form-group">
+        <label for="name">Name <span class="required">*</span></label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          v-model="name"
+          @:keypress="alphaOnly($event)"
+          data-lpignore="true"
+        />
+      </div>
+      <div class="form-group">
+        <label for="init">Initiative <span class="required">*</span></label>
+        <input
+          type="text"
+          id="init"
+          class="form-control"
+          v-model="init"
+          data-lpignore="true"
+          @:keypress="numberOnly($event)"
+        />
+      </div>
+      <div class="form-group">
+        <label for="hp">Hit Points <span class="required">*</span></label>
+        <input
+          type="text"
+          id="hp"
+          class="form-control"
+          v-model="hp"
+          data-lpignore="true"
+          @:keypress="numberOnly($event)"
+        />
+      </div>
+      <div class="form-group">
+        <label for="group">Group Create</label>
+        <input type="number" id="group" class="form-control" v-model="groupNumber" />
+      </div>
     </div>
-    <div class="form-group">
-      <label for="init">Initiative <span class="required">*</span></label>
-      <input
-        type="text"
-        id="init"
-        class="form-control"
-        v-model="init"
-        data-lpignore="true"
-        @:keypress="numberOnly($event)"
-      />
+    <div class="interactive push-left">
+      <button type="button" class="btn" @click="submit">Add</button>
     </div>
-    <div class="form-group">
-      <label for="hp">Hit Points <span class="required">*</span></label>
-      <input
-        type="text"
-        id="hp"
-        class="form-control"
-        v-model="hp"
-        data-lpignore="true"
-        @:keypress="numberOnly($event)"
-      />
-    </div>
-    <button type="button" class="btn push-left" @click="submit">Add</button>
   </form>
 </template>
 
@@ -44,6 +52,7 @@ const emit = defineEmits(['submit']);
 const name = ref('');
 const init = ref<number>();
 const hp = ref<number>();
+const groupNumber = ref<number>(1);
 
 const alphaOnly = (event: { keyCode: number; preventDefault: () => void }) => {
   const char = String.fromCharCode(event.keyCode);
@@ -60,10 +69,16 @@ const numberOnly = (event: { keyCode: number; preventDefault: () => void }) => {
 const submit = () => {
   if (name.value === '' || init.value === undefined) return;
 
-  emit('submit', { name: name.value, initiative: +init.value, hp: +hp.value });
+  emit('submit', {
+    name: name.value,
+    initiative: +init.value,
+    hp: hp.value,
+    groupNumber: groupNumber.value
+  });
   name.value = '';
   init.value = undefined;
-  hp.value = undefined;
+  hp.value = 1;
+  groupNumber.value = 1;
 };
 </script>
 
@@ -73,16 +88,18 @@ const submit = () => {
 }
 .form {
   display: flex;
+  flex-wrap: no-wrap;
   gap: 1rem;
   justify-content: flex-start;
   align-items: flex-end;
+  width: 100%;
 }
 
 .form .btn {
   padding: 0.5rem 1rem;
 }
 
-.form .btn.push-left {
+.push-left {
   margin-left: auto;
 }
 
@@ -97,5 +114,11 @@ const submit = () => {
   border: 1px solid #ccc;
   border-radius: 0.25rem;
   font-size: 1rem;
+}
+
+.creature {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 </style>

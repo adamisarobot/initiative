@@ -16,8 +16,9 @@ const props = defineProps<{
   label?: string;
   sronly?: boolean;
 }>();
-
+const emit = defineEmits(['update:number']);
 const inputNumber = computed(() => props.number);
+emit('update:number', inputNumber);
 </script>
 
 <style scoped>
