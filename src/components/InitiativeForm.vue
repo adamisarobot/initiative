@@ -47,7 +47,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-const emit = defineEmits(['submit']);
+import { useInitiativeStore } from '@/stores/initiative';
+
+const initiative = useInitiativeStore();
 
 const name = ref('');
 const init = ref<number>();
@@ -68,16 +70,16 @@ const numberOnly = (event: { keyCode: number; preventDefault: () => void }) => {
 
 const submit = () => {
   if (name.value === '' || init.value === undefined) return;
-
-  emit('submit', {
+  initiative.addToList({
     name: name.value,
     initiative: +init.value,
-    hp: hp.value,
+    hp: +hp.value,
     groupNumber: groupNumber.value
   });
+
   name.value = '';
   init.value = undefined;
-  hp.value = 1;
+  hp.value = 0;
   groupNumber.value = 1;
 };
 </script>

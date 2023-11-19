@@ -1,8 +1,6 @@
 <template>
-  <li class="item">
-    <div class="item__init">
-      <InlineInputNumber :number="pc.initiative" />
-    </div>
+  <li :id="pc.uuid" class="item">
+    <div class="item__init">{{ pc.initiative }}</div>
     <div class="item__name">{{ pc.name }}</div>
     <div class="item__hp">
       <InlineInputNumber :number="pc.hp" label="HP: " />
@@ -12,8 +10,10 @@
 
 <script lang="ts" setup>
 import InlineInputNumber from '@/components/InlineInputNumber.vue';
+
 defineProps<{
   pc: {
+    uuid: string;
     name: string;
     initiative: number;
     hp: number;
