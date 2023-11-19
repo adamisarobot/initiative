@@ -5,20 +5,30 @@
     type="text"
     maxlength="3"
     data-lpignore="true"
-    v-model.number="inputNumber"
+    :value="inputNumber"
+    @input="updateNumber"
   />
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import debounce from '@/lib/debounce';
+import { ref } from 'vue';
+
 const props = defineProps<{
   number: number;
   label?: string;
   sronly?: boolean;
 }>();
-const emit = defineEmits(['update:number']);
-const inputNumber = computed(() => props.number);
-emit('update:number', inputNumber);
+const emit = defineEmits(['updateNumber']);
+const inputNumber = ref(props.number);
+
+const updateNumber = debounce((event: InputEvent) => {
+  const newNumber = parseInt((event.target as HTMLInputElement).value, 10);
+  if (!isNaN(newNumber)) {
+    emit('updateNumber', newNumber);
+    return;
+  }
+}, 300);
 </script>
 
 <style scoped>
