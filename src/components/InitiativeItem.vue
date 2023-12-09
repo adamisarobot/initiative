@@ -1,28 +1,46 @@
 <template>
   <li :id="pc.uuid" class="item">
-    <div class="item__init">{{ pc.initiative }}</div>
-    <div class="item__name">{{ pc.name }}</div>
-    <div class="item__hp">
-      <InlineInputNumber :number="pc.hp" label="HP: " />
-    </div>
+    <aside v-if="isAdmin" class="item__controls">
+      <InitiativeItemUpdate :pc="pc" />
+    </aside>
+    <section class="item__row">
+      <div class="item__init">{{ pc.initiative }}</div>
+      <div class="item__name">{{ pc.name }}</div>
+      <div class="item__hp">
+        <InlineInputNumber :number="pc.hp" label="HP: " />
+      </div>
+    </section>
   </li>
 </template>
 
 <script lang="ts" setup>
 import InlineInputNumber from '@/components/InlineInputNumber.vue';
+import InitiativeItemUpdate from '@/components/InitiativeItemUpdate.vue';
+import { useRoles } from '@/composibles/useRoles';
+import type { Pc } from '@/types/initiativeTypes';
 
 defineProps<{
-  pc: {
-    uuid: string;
-    name: string;
-    initiative: number;
-    hp: number;
-  };
+  pc: Pc;
 }>();
+
+const { isAdmin } = useRoles();
 </script>
 
 <style scoped>
 .item {
+  position: relative;
+  display: flex;
+}
+
+.item__controls {
+  position: absolute;
+  left: -100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem;
+}
+.item__row {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
@@ -30,6 +48,7 @@ defineProps<{
   border: 1px solid #ccc;
   border-radius: 0.25rem;
   font-size: 1rem;
+  width: 100%;
 }
 
 .item__init {
