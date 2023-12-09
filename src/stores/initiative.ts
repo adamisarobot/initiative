@@ -1,30 +1,49 @@
-import { reactive } from 'vue';
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 
-export const useInitiativeStore = defineStore('initiative', () => {
-  const initiative = reactive<{ uuid: string; name: string; initiative: number; hp: number }[]>([]);
+export type Initiative = Pc[];
 
-  function addToList(pc: { name: string; initiative: number; hp: number; groupNumber: number }) {
-    for (let i = 0; i < pc.groupNumber; i++) {
-      if (i === 10) break;
-      const uuid = self.crypto.randomUUID();
-      const name = pc.groupNumber > 1 ? `${pc.name} #${i + 1}` : pc.name;
-      initiative.push({
-        uuid,
-        name,
-        initiative: +pc.initiative,
-        hp: +pc.hp
-      });
+export type Pc = {
+  uuid: string;
+  name: string;
+  initiative: number;
+  hp: number;
+  groupNumber: number;
+};
+
+export const useInitiativeStore = defineStore('initiative', {
+  state: () => ({
+    initiative: [] as Initiative
+  }),
+
+  actions: {
+    addCharacterToInitiative(pc: Pc) {
+      this.initiative.push(pc);
+      this.sortInitiativeArray();
+    },
+
+    updateCharacterInitiative(pcUuId: string, newInitiative: number) {
+      const pcIndex = this.initiative.findIndex((pc: Pc) => pc.uuid === pcUuId);
+
+      if (pcIndex !== -1) {
+        this.initiative[pcIndex].initiative = newInitiative;
+        this.sortInitiativeArray();
+      }
+    },
+
+    removeCharacterFromInitiative(pcUuId: string) {
+      this.initiative = this.initiative.filter((pc: Pc) => pc.uuid !== pcUuId);
+    },
+
+    sortInitiativeArray() {
+      this.initiative.sort((a, b) => b.initiative - a.initiative);
+    },
+
+    clearInitiative() {
+      this.initiative = [];
     }
-    initiative.sort((a, b) => b.initiative - a.initiative);
   }
-
-  function updateList(pc: { uuid: string; name: string; initiative: number; hp: number }) {
-    console.log(pc);
-    const index = initiative.findIndex((item) => item.uuid === pc.uuid);
-    initiative[index] = pc;
-    initiative.sort((a, b) => b.initiative - a.initiative);
-  }
-
-  return { initiative, addToList, updateList };
 });
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useInitiativeStore, import.meta.hot));
+}

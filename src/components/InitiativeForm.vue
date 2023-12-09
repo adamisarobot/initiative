@@ -69,17 +69,24 @@ const numberOnly = (event: { keyCode: number; preventDefault: () => void }) => {
 };
 
 const submit = () => {
-  if (name.value === '' || init.value === undefined) return;
-  initiative.addToList({
-    name: name.value,
-    initiative: +init.value,
-    hp: +hp.value,
-    groupNumber: groupNumber.value
-  });
+  if (name.value === '' || init.value === undefined || hp.value === undefined) return;
+  for (let i = 0; i < groupNumber.value; i++) {
+    if (i === 10) break;
 
+    const pcName = groupNumber.value > 1 ? `${name.value} #${i + 1}` : name.value;
+    const newPc = {
+      uuid: self.crypto.randomUUID(),
+      name: pcName,
+      initiative: +init.value,
+      hp: +hp.value,
+      groupNumber: groupNumber.value
+    };
+
+    initiative.addCharacterToInitiative(newPc);
+  }
   name.value = '';
   init.value = undefined;
-  hp.value = 0;
+  hp.value = undefined;
   groupNumber.value = 1;
 };
 </script>
