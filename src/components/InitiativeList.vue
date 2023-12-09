@@ -8,7 +8,8 @@
 import InitiativeItem from '@/components/InitiativeItem.vue';
 import { useInitiativeStore } from '@/stores/initiative';
 
-const { initiative } = useInitiativeStore();
+const store = useInitiativeStore();
+const initiative = store.initiative;
 </script>
 
 <style scoped>
