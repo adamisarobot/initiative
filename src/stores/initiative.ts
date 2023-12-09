@@ -22,7 +22,13 @@ export const useInitiativeStore = defineStore('initiative', {
     },
 
     removeCharacterFromInitiative(pcUuId: string) {
-      this.initiative = this.initiative.filter((pc: Pc) => pc.uuid !== pcUuId);
+      const pcIndex = this.initiative.findIndex((pc: Pc) => pc.uuid === pcUuId);
+      console.log('Hello', pcIndex);
+      if (pcIndex !== -1) {
+        // remove the character from the initiative array by index
+        this.initiative.splice(pcIndex, 1);
+        this.sortInitiativeArray();
+      }
     },
 
     sortInitiativeArray() {

@@ -1,21 +1,25 @@
 <template>
   <li :id="pc.uuid" class="item">
-    <aside v-if="isAdmin" class="item__controls">
+    <aside v-if="isAdmin" class="item__controls item__controls--left">
       <InitiativeItemUpdate :pc="pc" />
     </aside>
     <section class="item__row">
       <div class="item__init">{{ pc.initiative }}</div>
       <div class="item__name">{{ pc.name }}</div>
-      <div class="item__hp">
+      <div v-if="isAdmin" class="item__hp">
         <InlineInputNumber :number="pc.hp" label="HP: " />
       </div>
     </section>
+    <aside v-if="isAdmin" class="item__controls item__controls--right">
+      <InitiativeItemRemove :pc="pc" />
+    </aside>
   </li>
 </template>
 
 <script lang="ts" setup>
 import InlineInputNumber from '@/components/InlineInputNumber.vue';
 import InitiativeItemUpdate from '@/components/InitiativeItemUpdate.vue';
+import InitiativeItemRemove from '@/components/InitiativeItemRemove.vue';
 import { useRoles } from '@/composibles/useRoles';
 import type { Pc } from '@/types/initiativeTypes';
 
@@ -34,11 +38,18 @@ const { isAdmin } = useRoles();
 
 .item__controls {
   position: absolute;
-  left: -100px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0.5rem;
+}
+
+.item__controls--left {
+  left: -100px;
+}
+.item__controls--right {
+  right: -100px;
 }
 .item__row {
   display: flex;
