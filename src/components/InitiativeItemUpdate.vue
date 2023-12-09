@@ -7,7 +7,7 @@
 
 <script lang="ts" setup>
 import { useInitiativeStore } from '@/stores/initiative';
-import type { Pc } from '@/store/initiative';
+import type { Pc } from '@/types/initiativeTypes';
 
 const store = useInitiativeStore();
 
