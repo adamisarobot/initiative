@@ -1,14 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
-
-export type Initiative = Pc[];
-
-export type Pc = {
-  uuid: string;
-  name: string;
-  initiative: number;
-  hp: number;
-  groupNumber: number;
-};
+import type { Pc, Initiative } from '@/types/initiativeTypes';
 
 export const useInitiativeStore = defineStore('initiative', {
   state: () => ({
