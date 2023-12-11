@@ -5,11 +5,16 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import InitiativeItem from '@/components/InitiativeItem.vue';
 import { useInitiativeStore } from '@/stores/initiative';
 
-const store = useInitiativeStore();
-const initiative = store.initiative;
+const initiativeStore = useInitiativeStore();
+const initiative = ref(initiativeStore.initiative);
+
+onMounted(() => {
+  initiativeStore.fetchInitiative();
+});
 </script>
 
 <style scoped>

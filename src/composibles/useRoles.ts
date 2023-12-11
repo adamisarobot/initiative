@@ -8,8 +8,6 @@ export function useRoles() {
     return route.path === '/admin';
   });
 
-  console.log(isAdmin.value);
-
   return {
     isAdmin
   };
