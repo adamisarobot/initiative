@@ -5,18 +5,17 @@
 </template>
 
 <script lang="ts" setup>
-import { useInitiativeStore } from '@/stores/initiative';
 import type { Pc } from '@/types/initiativeTypes';
-
-const store = useInitiativeStore();
+import { db } from '../firebase';
+import { ref as dbRef, remove } from 'firebase/database';
 
 const props = defineProps<{
   pc: Pc;
 }>();
 
 const removeCharacter = () => {
-  store.removeCharacterFromInitiative(props.pc.uuid);
+  const item = dbRef(db, 'initiative/' + props.pc.id);
+  remove(item);
 };
 </script>
-
 <style lang="scss" scoped></style>
