@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import type { Pc, Initiative } from '@/types/initiativeTypes';
 
+// Decommisioned/ Not in use
 export const useInitiativeStore = defineStore('initiative', {
   state: () => ({
     initiative: [] as Initiative

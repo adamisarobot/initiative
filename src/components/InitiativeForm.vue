@@ -47,9 +47,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useInitiativeStore } from '@/stores/initiative';
-
-const initiative = useInitiativeStore();
+import { initiativeRef } from '../firebase';
+import { push } from 'firebase/database';
 
 const name = ref('');
 const init = ref<number>();
@@ -82,8 +81,10 @@ const submit = () => {
       groupNumber: groupNumber.value
     };
 
-    initiative.addCharacterToInitiative(newPc);
+    push(initiativeRef, newPc);
   }
+
+  // Reset Form
   name.value = '';
   init.value = undefined;
   hp.value = undefined;

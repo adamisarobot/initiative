@@ -6,22 +6,25 @@
 </template>
 
 <script lang="ts" setup>
-import { useInitiativeStore } from '@/stores/initiative';
 import type { Pc } from '@/types/initiativeTypes';
-
-const store = useInitiativeStore();
+import { db } from '../firebase';
+import { ref as dbRef, update } from 'firebase/database';
 
 const props = defineProps<{
   pc: Pc;
 }>();
 
 function incrementInit() {
-  store.updateCharacterInitiative(props.pc.uuid, props.pc.initiative + 1);
+  const item = dbRef(db, 'initiative/' + props.pc.id);
+  update(item, {
+    initiative: props.pc.initiative + 1
+  });
 }
 
 function decrementInit() {
-  store.updateCharacterInitiative(props.pc.uuid, props.pc.initiative - 1);
+  const item = dbRef(db, 'initiative/' + props.pc.id);
+  update(item, {
+    initiative: props.pc.initiative - 1
+  });
 }
 </script>
-
-<style></style>
