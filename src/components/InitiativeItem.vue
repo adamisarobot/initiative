@@ -1,5 +1,5 @@
 <template>
-  <li :id="pc.uuid" class="item">
+  <li :id="pc.id" class="item">
     <aside v-if="isAdmin" class="item__controls item__controls--left">
       <InitiativeItemUpdate :pc="pc" />
     </aside>
@@ -7,7 +7,7 @@
       <div class="item__init">{{ pc.initiative }}</div>
       <div class="item__name">{{ pc.name }}</div>
       <div v-if="isAdmin" class="item__hp">
-        <InlineInputNumber :number="pc.hp" label="HP: " />
+        <InlineInputNumber :number="pc.hp" label="HP: " @updateNumber="updateNumber" />
       </div>
     </section>
     <aside v-if="isAdmin" class="item__controls item__controls--right">
@@ -17,17 +17,26 @@
 </template>
 
 <script lang="ts" setup>
+import { db } from '../firebase';
+import { ref as dbRef, update } from 'firebase/database';
 import InlineInputNumber from '@/components/InlineInputNumber.vue';
 import InitiativeItemUpdate from '@/components/InitiativeItemUpdate.vue';
 import InitiativeItemRemove from '@/components/InitiativeItemRemove.vue';
+
 import { useRoles } from '@/composibles/useRoles';
 import type { Pc } from '@/types/initiativeTypes';
 
-defineProps<{
+const props = defineProps<{
   pc: Pc;
 }>();
 
 const { isAdmin } = useRoles();
+const updateNumber = (newNumber: number) => {
+  const item = dbRef(db, 'initiative/' + props.pc.id);
+  update(item, {
+    hp: newNumber
+  });
+};
 </script>
 
 <style scoped>

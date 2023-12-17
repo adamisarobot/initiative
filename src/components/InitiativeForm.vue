@@ -74,7 +74,6 @@ const submit = () => {
 
     const pcName = groupNumber.value > 1 ? `${name.value} #${i + 1}` : name.value;
     const newPc = {
-      uuid: self.crypto.randomUUID(),
       name: pcName,
       initiative: +init.value,
       hp: +hp.value,

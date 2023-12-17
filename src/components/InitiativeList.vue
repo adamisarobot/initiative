@@ -1,6 +1,11 @@
 <template>
   <ul class="init-list" v-if="initiative.length">
-    <InitiativeItem v-for="pc in sortedInitiativeDesc" :pc="pc" :key="pc.name" />
+    <InitiativeItem
+      v-for="(pc, index) in sortedInitiativeDesc"
+      :class="{ active: index === 0 }"
+      :pc="pc"
+      :key="pc.name"
+    />
   </ul>
   <footer v-if="isAdmin">
     <button class="btn" @click="clearInitiative">Clear Initiative</button>

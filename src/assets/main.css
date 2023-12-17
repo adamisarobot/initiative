@@ -10,3 +10,10 @@ h1 {
   font-weight: 700;
   margin-bottom: 1rem;
 }
+
+.active .item__row {
+  padding: 1rem 0.5rem !important;
+  border-color: black !important;
+  outline: 3px solid red;
+  outline-offset: 2px;
+}
