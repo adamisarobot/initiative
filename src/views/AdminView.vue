@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1>CRUD!</h1>
+    <h1>FIGHT! Admin</h1>
     <div class="card">
       <InitiativeForm />
       <InitiativeList />
