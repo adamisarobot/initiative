@@ -5,7 +5,7 @@ export function useRoles() {
   const route = useRoute();
 
   const isAdmin = computed(() => {
-    return route.path === '/admin';
+    return route.path === '/adam4ever';
   });
 
   return {

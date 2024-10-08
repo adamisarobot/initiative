@@ -5,16 +5,16 @@
 </template>
 
 <script lang="ts" setup>
-import type { Pc } from '@/types/initiativeTypes';
+import type { Creature } from '@/types/initiativeTypes';
 import { db } from '../firebase';
 import { ref as dbRef, remove } from 'firebase/database';
 
 const props = defineProps<{
-  pc: Pc;
+  creature: Creature;
 }>();
 
 const removeCharacter = () => {
-  const item = dbRef(db, 'initiative/' + props.pc.id);
+  const item = dbRef(db, 'initiative/' + props.creature.id);
   remove(item);
 };
 </script>

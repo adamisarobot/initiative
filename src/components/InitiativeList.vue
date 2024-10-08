@@ -1,10 +1,10 @@
 <template>
   <ul class="init-list" v-if="initiative.length">
     <InitiativeItem
-      v-for="(pc, index) in sortedInitiativeDesc"
+      v-for="(creature, index) in sortedInitiativeDesc"
       :class="{ active: index === 0 }"
-      :pc="pc"
-      :key="pc.name"
+      :creature="creature"
+      :key="creature.name"
     />
   </ul>
   <footer v-if="isAdmin">
@@ -18,7 +18,7 @@ import { useDatabaseList } from 'vuefire';
 import { initiativeRef } from '../firebase';
 
 import InitiativeItem from '@/components/InitiativeItem.vue';
-import type { Initiative, Pc } from '@/types/initiativeTypes';
+import type { Initiative, Creature } from '@/types/initiativeTypes';
 import { remove } from 'firebase/database';
 import { useRoles } from '@/composibles/useRoles';
 
@@ -26,15 +26,14 @@ const { isAdmin } = useRoles();
 const initiative = useDatabaseList(initiativeRef);
 
 const sortedInitiativeDesc = computed(() => {
-  // I hate typescript in the front end.
-  return [...(initiative.value as unknown as Initiative)]
-    .map((pc: Pc) => {
+  return [...(initiative.value as Initiative)]
+    .map((creature: Creature) => {
       return {
-        ...pc,
-        id: pc.id
+        ...creature,
+        id: creature.id
       };
     })
-    .sort((a: Pc, b: Pc) => b.initiative - a.initiative);
+    .sort((a: Creature, b: Creature) => b.initiative - a.initiative);
 });
 
 const clearInitiative = () => {

@@ -1,34 +1,35 @@
 <template>
   <label :class="{ 'sr-only': sronly }" for="hp-inline">{{ label }}</label>
   <input
+    ref="inputInline"
     class="item__inline"
     type="text"
     maxlength="3"
     data-lpignore="true"
-    :value="inputNumber"
-    @input="updateNumber"
+    :value="props.number"
+    @click="$refs.inputInline.select()"
+    @keydown.enter="updateNumber"
   />
 </template>
 
 <script lang="ts" setup>
-import debounce from '@/lib/debounce';
-import { ref } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps<{
   number: number;
   label?: string;
   sronly?: boolean;
 }>();
-const emit = defineEmits(['updateNumber']);
-const inputNumber = ref(props.number);
 
-const updateNumber = debounce((event: InputEvent) => {
+const emit = defineEmits(['updateNumber']);
+
+const updateNumber = (event: KeyboardEvent) => {
   const newNumber = parseInt((event.target as HTMLInputElement).value, 10);
   if (!isNaN(newNumber)) {
     emit('updateNumber', newNumber);
-    return;
   }
-}, 300);
+  (event.target as HTMLInputElement).blur();
+};
 </script>
 
 <style scoped>
@@ -39,5 +40,6 @@ const updateNumber = debounce((event: InputEvent) => {
   border: 0;
   border-radius: 0.25rem;
   font-size: 1rem;
+  text-align: right;
 }
 </style>

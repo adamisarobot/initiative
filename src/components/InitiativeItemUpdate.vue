@@ -6,25 +6,25 @@
 </template>
 
 <script lang="ts" setup>
-import type { Pc } from '@/types/initiativeTypes';
+import type { Creature } from '@/types/initiativeTypes';
 import { db } from '../firebase';
 import { ref as dbRef, update } from 'firebase/database';
 
 const props = defineProps<{
-  pc: Pc;
+  creature: Creature;
 }>();
 
 function incrementInit() {
-  const item = dbRef(db, 'initiative/' + props.pc.id);
+  const item = dbRef(db, 'initiative/' + props.creature.id);
   update(item, {
-    initiative: props.pc.initiative + 1
+    initiative: props.creature.initiative + 1
   });
 }
 
 function decrementInit() {
-  const item = dbRef(db, 'initiative/' + props.pc.id);
+  const item = dbRef(db, 'initiative/' + props.creature.id);
   update(item, {
-    initiative: props.pc.initiative - 1
+    initiative: props.creature.initiative - 1
   });
 }
 </script>
