@@ -5,7 +5,7 @@ A project to create a simple but feature rich initiative/stat tracker for 5e/RPG
 ## Todos:
 
 
-[x] Add initiative editing and auto re-sort  
+- [x] Add initiative editing and auto re-sort  
 [x] Add HP editing and display  
 [ ] Add State / Pinia - If needed. (The RTDB is the store)  
 [x] Add FireVue - Firebase Realtime Database  
