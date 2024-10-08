@@ -1,17 +1,17 @@
 <template>
-  <li :id="pc.id" class="item">
+  <li :id="creature.id" class="item">
     <aside v-if="isAdmin" class="item__controls item__controls--left">
-      <InitiativeItemUpdate :pc="pc" />
+      <InitiativeItemUpdate :creature="creature" />
     </aside>
     <section class="item__row">
-      <div class="item__init">{{ pc.initiative }}</div>
-      <div class="item__name">{{ pc.name }}</div>
+      <div class="item__init">{{ creature.initiative }}</div>
+      <div class="item__name">{{ creature.name }}</div>
       <div v-if="isAdmin" class="item__hp">
-        <InlineInputNumber :number="pc.hp" label="HP: " @updateNumber="updateNumber" />
+        <InlineInputNumber :number="creature.hp" label="HP: " @updateNumber="updateNumber" />
       </div>
     </section>
     <aside v-if="isAdmin" class="item__controls item__controls--right">
-      <InitiativeItemRemove :pc="pc" />
+      <InitiativeItemRemove :creature="creature" />
     </aside>
   </li>
 </template>
@@ -24,15 +24,15 @@ import InitiativeItemUpdate from '@/components/InitiativeItemUpdate.vue';
 import InitiativeItemRemove from '@/components/InitiativeItemRemove.vue';
 
 import { useRoles } from '@/composibles/useRoles';
-import type { Pc } from '@/types/initiativeTypes';
+import type { Creature } from '@/types/initiativeTypes';
 
 const props = defineProps<{
-  pc: Pc;
+  creature: Creature;
 }>();
 
 const { isAdmin } = useRoles();
 const updateNumber = (newNumber: number) => {
-  const item = dbRef(db, 'initiative/' + props.pc.id);
+  const item = dbRef(db, 'initiative/' + props.creature.id);
   update(item, {
     hp: newNumber
   });
