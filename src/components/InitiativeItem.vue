@@ -23,7 +23,7 @@ import InlineInputNumber from '@/components/InlineInputNumber.vue';
 import InitiativeItemUpdate from '@/components/InitiativeItemUpdate.vue';
 import InitiativeItemRemove from '@/components/InitiativeItemRemove.vue';
 
-import { useRoles } from '@/composibles/useRoles';
+import { useRoles } from '@/composables/useRoles';
 import type { Creature } from '@/types/initiativeTypes';
 
 const props = defineProps<{

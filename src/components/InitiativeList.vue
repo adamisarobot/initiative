@@ -20,7 +20,7 @@ import { initiativeRef } from '../firebase';
 import InitiativeItem from '@/components/InitiativeItem.vue';
 import type { Initiative, Creature } from '@/types/initiativeTypes';
 import { remove } from 'firebase/database';
-import { useRoles } from '@/composibles/useRoles';
+import { useRoles } from '@/composables/useRoles';
 
 const { isAdmin } = useRoles();
 const initiative = useDatabaseList(initiativeRef);
