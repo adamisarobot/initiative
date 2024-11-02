@@ -5,15 +5,44 @@
   margin: 0 auto;
 }
 
+/* Typography */
+.nunito-400 {
+  font-family: 'Nunito', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nunito-700 {
+  font-family: 'Nunito', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.dm-sans-400 {
+  font-family: 'DM Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.marker-400 {
+  font-family: 'Permanent Marker', cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 h1 {
-  font-size: 2.5rem;
+  font-size: 4.8rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
+/* The Loop */
 .active .item__row {
   padding: 1rem 0.5rem !important;
   border-color: black !important;
-  outline: 3px solid red;
+  outline: 3px solid rgb(171, 25, 25);
   outline-offset: 2px;
 }

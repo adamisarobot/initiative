@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header style="display: none">
     <div class="logo">A4E</div>
     <nav>
       <RouterLink to="/">Home</RouterLink>
@@ -10,4 +10,8 @@
 
 <script setup lang="ts"></script>
 
-<style scoped></style>
+<style scoped>
+header {
+  margin: 2rem 0;
+}
+</style>

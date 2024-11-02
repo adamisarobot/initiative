@@ -47,7 +47,6 @@ const updateNumber = (newNumber: number) => {
 
 .item__controls {
   position: absolute;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,18 +56,21 @@ const updateNumber = (newNumber: number) => {
 .item__controls--left {
   left: -100px;
 }
+
 .item__controls--right {
   right: -100px;
 }
+
 .item__row {
   display: flex;
   align-items: center;
+  font-size: 1rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
+  width: 100%;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
-  font-size: 1rem;
-  width: 100%;
+  background-color: #fff;
 }
 
 .item__init {
@@ -82,9 +84,11 @@ const updateNumber = (newNumber: number) => {
   padding-left: 0.5rem;
   border-left: 1px solid #ccc;
 }
+
 .item__hp {
   margin-left: auto;
 }
+
 .item__inline {
   max-width: 2.5rem;
   margin-left: 0.25rem;
